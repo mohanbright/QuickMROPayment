@@ -4,6 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment Success</title>
+    <style>
+        /* CSS to center content */
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f0f0f0; /* Optional: light grey background */
+            font-family: Arial, sans-serif; /* Optional: font family */
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff; /* Optional: white background for the container */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: box shadow */
+        }
+
+        h1 {
+            margin: 0;
+            color: #333; /* Optional: text color */
+        }
+
+        p {
+            font-size: 18px;
+            color: #666; /* Optional: text color */
+            margin: 10px 0;
+        }
+
+        .payment-id {
+            font-weight: bold;
+            color: #333; /* Optional: text color */
+        }
+    </style>
     <script>
         function getQueryParams() {
             const params = new URLSearchParams(window.location.search);
@@ -16,18 +52,24 @@
 
         function handlePaymentSuccess() {
             const params = getQueryParams();
+            const statusElement = document.getElementById('status');
+            const paymentIdElement = document.getElementById('payment-id');
+
             if (params.paymentId && params.token && params.PayerID) {
-                // Here you can make an AJAX request to your backend to validate the payment
-                // or handle it directly in the frontend.
-                document.getElementById('status').innerText = 'Payment successful!';
+                statusElement.innerText = 'Payment successful!';
+                paymentIdElement.innerText = `Payment ID: ${params.paymentId}`;
             } else {
-                document.getElementById('status').innerText = 'Payment failed.';
+                statusElement.innerText = 'Payment failed.';
+                paymentIdElement.innerText = '';
             }
         }
     </script>
 </head>
 <body onload="handlePaymentSuccess()">
-    <h1>Payment Status</h1>
-    <p id="status">Processing...</p>
+    <div class="container">
+        <h1>Payment Status</h1>
+        <p id="status">Processing...</p>
+        <p id="payment-id" class="payment-id"></p>
+    </div>
 </body>
 </html>
