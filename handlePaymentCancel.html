@@ -1,24 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Payment Cancelled</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-          font-family: Arial, sans-serif;
-          text-align: center;
-          padding: 20px;
+    <title>Payment Cancelled</title>
+    <script>
+        function handlePaymentCancel() {
+            document.getElementById('status').innerText = 'Payment was cancelled.';
         }
-    </style>
+    </script>
 </head>
-<body>
-<h1>Payment Cancelled</h1>
-<p>The payment process was cancelled. You can return to the app.</p>
-<script>
-    setTimeout(function() {
-      window.close();
-    }, 5000);
-</script>
+<body onload="handlePaymentCancel()">
+    <h1>Payment Status</h1>
+    <p id="status">Processing...</p>
 </body>
 </html>
