@@ -1,25 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Payment Successful</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-          font-family: Arial, sans-serif;
-          text-align: center;
-          padding: 20px;
+    <title>Payment Success</title>
+    <script>
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                paymentId: params.get('paymentId'),
+                token: params.get('token'),
+                PayerID: params.get('PayerID'),
+            };
         }
-    </style>
+
+        function handlePaymentSuccess() {
+            const params = getQueryParams();
+            if (params.paymentId && params.token && params.PayerID) {
+                // Here you can make an AJAX request to your backend to validate the payment
+                // or handle it directly in the frontend.
+                document.getElementById('status').innerText = 'Payment successful!';
+            } else {
+                document.getElementById('status').innerText = 'Payment failed.';
+            }
+        }
+    </script>
 </head>
-<body>
-<h1>Payment Successful</h1>
-<p>Thank you for your payment. You can now return to the app.</p>
-<script>
-    // Automatically close the tab after a delay or redirect
-    setTimeout(function() {
-      window.close();
-    }, 5000);
-</script>
+<body onload="handlePaymentSuccess()">
+    <h1>Payment Status</h1>
+    <p id="status">Processing...</p>
 </body>
 </html>
